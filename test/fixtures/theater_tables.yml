@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  theater_name: MyString
+  no_of_shows: 1
+  total_seates: 1
+  address: MyString
+
+two:
+  theater_name: MyString
+  no_of_shows: 1
+  total_seates: 1
+  address: MyString

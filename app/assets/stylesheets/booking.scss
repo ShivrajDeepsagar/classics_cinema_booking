@@ -1,0 +1,49 @@
+.seats {
+  clip: rect(0 0 0 0);
+  max-width: 10px;
+  min-width: 10px;
+  overflow: hidden;
+  position: absolute;
+}
+
+.seat_lable {
+  border-radius:  4px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  padding: 5px 10px 5px 10px;
+}
+
+.spacer {
+  padding: 20px;
+}
+
+.screen {
+  margin: 10px;
+  background-color: #eee;
+  border-radius: 50% 50% 50% 50% /.75em .75em .75em .75em;
+  height: 110px;
+  border: 1px sold #ddd;
+}
+
+.disable {
+  cursor: not-allowed;
+  background-color: #484a4c;
+  border-radius:  4px;
+  border: 1px solid #eee;
+  color: #fff;
+  padding: 5px 10px 5px 10px;
+}
+
+.seats:hover + .seat_lable {
+  background-color: #f5f5f5;
+  border: 1px solid #3B99FC;
+}
+
+.seats:focus + .seat_lable {
+  border: 1px solid #eee;
+}
+
+.seats:checked + .seat_lable {
+  background-color: #f0ad4e;
+  border-color: #efg;
+}

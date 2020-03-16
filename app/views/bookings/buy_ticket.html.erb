@@ -1,0 +1,43 @@
+<% provide(:title,"Booking..") %>
+<% screening_id = @display[0] %>
+<% show = @display[1] %>
+<% gender = @display[2] %>
+<% cost = @display[3] %>
+<% if show == 1 %>
+   <% seats_left = @screenings.first_seats %>
+<% elsif show == 2 %>
+   <% seats_left = @screenings.second_seats %>
+<% elsif show == 3 %>
+   <% seats_left = @screenings.third_seats %>
+<% elsif show == 4 %>
+   <% seats_left = @screenings.fourth_seats %>
+<% end %>
+
+<% if seats_left > 0 %>
+  <h3 class = "col-md-3 well well-sm pull-right">1 ticket &#8377;<%= cost %></h1>
+  <br>
+  <div class="container">
+    <% if gender.downcase == 'female' %>
+      <h5 class = "text-primary">5% discount on each ticket</h5>
+    <% end %>
+    <div class = "col-md-4">
+    <div class = "panel panel-default">
+      <div class = "panel-heading ">Seats Remaining <%= seats_left %></div>
+      <div class = "panel-body">
+        <%= form_for(:buyticket, url: buyticket_path) do |f| %>
+          <%= f.hidden_field :screening_id, value: screening_id %>
+          <%= f.hidden_field :show, value: params[:show] %>
+          <%= f.label :tickets, "Number of Tickets" %>
+          <%= f.select :tickets, [ "1", "2","3","4","5","6","7","8","9","10" ], prompt: 'Select', class: 'form-control', required: true %>
+          <%= f.submit "continue", class: "btn btn-sm btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+    </div>
+</div>
+
+<% else %>
+  <h2 style = "color:red">Show is Full</h2>
+<% end %>
+
+

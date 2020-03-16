@@ -1,0 +1,23 @@
+<% provide(:title, "New Movie") %>
+<h1>Create new Movie Post</h1>
+
+<% if @errors.any? %>
+  <% @errors.each do |message| %>
+    <li><%= message %></li>
+  <% end %>
+<% end %>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(:movie, url: newmovie_path) do |f| %>
+
+      <%= f.label :Movie_Name %>
+      <%= f.text_field :movie_name, class: 'form-control' %>
+
+      <%= f.label :duration %>
+      <%= f.number_field :duration, class: 'form-control' %>
+
+      <%= f.submit "Create Post", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<% provide(:title,"Apply Coupon") %>
+
+<div class="col-md-2 col-md-offset-2">
+  <br>
+  <%= form_for(:apply_coupon, url: applycoupon_path) do |f|%>
+    <%= f.label "Enter Coupon Code" %>
+    <%= f.text_field :code , class: "form-control" %>
+    <%= f.submit "Apply Coupon", class: "btn btn-primary" %>
+    <br>
+  <% end %>
+</div>
+<div class = "col-md-2 pull-right">
+  <p class = "text-primary" >Cost: <%= session[:cost] * session[:tickets].to_i %></p>
+  <p class = "text-primary" >Current Discount: <%=  session[:discout] %>%</p>
+  <%= form_for(:paymnet, url: payment_path, method: "get") do |f|%>
+    <%= f.submit "continue", name: 'continue', class: "btn btn-primary" %>
+  <% end %>
+</div>

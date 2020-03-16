@@ -1,0 +1,50 @@
+<% provide(:title, "Create Screening") %>
+<h1>Create new Screening</h1>
+
+<div class="row">
+<% if @errors.any? %>
+    <% @errors.each do |message| %>
+      <li class="error"><%= message %></li>
+    <% end %>
+  <% end %>
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(:screening, url: createscreening_path) do |f| %>
+
+      <%= f.label :Movie_Id %>
+      <%= f.text_field :movie_id, class: 'form-control' %>
+
+      <%= f.label :theater_Id %>
+      <%= f.text_field :theater_id, class: 'form-control' %>
+
+      <%= f.label :Screening_Date%>
+      <%= f.date_field :ondate, class: 'form-control' %>
+
+      <%= f.label :cost %>
+      <%= f.number_field :cost, class: 'form-control' %>
+
+
+      <table class="table table-sm">
+  <thead>
+    <tr>
+      <th>10 AM</th>
+      <th>1 PM</th>
+      <th>4 PM</th>
+      <th>7 pm</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= f.check_box :first, checked:false%></td>     <!--,checked:true -->
+      <td><%= f.check_box :second, checked:false%></td>
+      <td><%= f.check_box :third, checked:false%></td>
+      <td><%= f.check_box :fourth, checked:false%></td>
+    </tr> 
+    </tbody>
+    </table>
+
+      
+
+      <%= f.submit "Create Post", class: "btn btn-primary", id: "check_values"%>
+    <% end %>
+  </div>
+</div>

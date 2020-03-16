@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  reserved: false
+  paid: false
+  active: false
+
+two:
+  reserved: false
+  paid: false
+  active: false

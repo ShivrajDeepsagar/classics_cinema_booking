@@ -1,0 +1,22 @@
+base: &base
+  adapter: postgresql
+  encoding: utf8
+  username: test
+  password: testdb
+  host: 127.0.0.1
+  pool: 5
+
+development:
+  <<: *default
+  database: movie_app_development1
+
+
+test:
+  <<: *default
+  database: movie_app_test
+
+production:
+  <<: *default
+  database: movie_app_production
+  username: movie_app
+  password:

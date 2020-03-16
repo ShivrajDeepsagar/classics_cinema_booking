@@ -1,0 +1,49 @@
+<% provide(:title,"Select Seats") %>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    var limit = <%= @ticket_details["tickets"] %>;
+    $('.seats').on('change', function(evt) {
+      if($(this).siblings(':checked').length >= limit) {
+        this.checked = false;
+        alert("you already selected "+limit+" seats")
+      }
+    });
+  });
+</script>
+
+<% seats = [] %>
+<% @seats.each do |seat| %>
+  <% seats.push(seat.seat_details) %>
+<% end %>
+<% seat_details = seats.flatten  %>
+<div class = "col-md-offset-1">
+<h4 class = "text-primary">Please Select <%= @ticket_details["tickets"] %> Seats</h4>
+  <div class="row">
+  <div class="screen col-md-5"></div>
+  </div>
+  <%= form_for(:select_seats, url: selectseats_path) do |f| %>
+    <% ('a'..'j').each do |row_name| %>
+      <div class = "btn-group mr-1" role = "group" id = "button_group" aria-label = "First group">
+        <p class = "btn btn-primary"><%= row_name %></p>
+      </div>
+      <% (1..10).each do |first_half| %>
+        <% seat = row_name.to_s+first_half.to_s %>
+        <% if not seat_details.include?(seat) %>
+          <%= f.check_box seat ,checked:false, name: "select_seats["+seat+"]" ,class: "seats" %>
+          <%= f.label seat, first_half, class: "seat_lable" %>
+        <% else %>
+          <%= f.label seat, first_half, class: "disable" %>
+        <% end %>
+
+        <% if (first_half % 5 == 0) && (first_half%10 != 0) %>
+          <span class ="spacer"></span>
+        <% end %>
+      <% end %>
+      <br>
+    <% end %>
+    <div class="col-md-2">
+    <%= f.submit "Select Seats", id: "check", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,19 @@
+<% provide(:title,"Home") %>
+
+<div class = "jumbotron">
+ <div class = "container">
+   <h3>Book Now! Watch the greatest classics on the big sceeen!</h3>
+ </div>
+</div>
+
+<div class = "container">
+  <div class = "row">
+    <% @movie.each do |movie| %>
+    <div class = "col-md-4">
+      <img src=<%= movie.image_url %> />
+      <h5> <%= movie.movie_name.titleize %></h5>
+     <p><a href="/booknow?movie_id=<%= movie.id %>" class = "btn btn-default" %>Book Now!</a> </p>
+    </div>
+    <% end %>
+  </div>
+</div>

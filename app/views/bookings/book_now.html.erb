@@ -1,0 +1,49 @@
+<% provide(:title,"Booking..") %>
+
+<h3>Book Now</h3>
+<% if @screenings.length == 0 %><P class = "text-primary" >No Screening for this movie</P><%end %>
+
+<% @screenings.each do |screening| %>
+  <% movie_name = screening.movie.movie_name.titleize %>
+  <% theater_name = screening.theater.theater_name %>
+  <% theater_address = screening.theater.address %>
+  <% cost = screening.cost %>
+  <% first = screening.first %>
+  <% second = screening.second %>
+  <% third = screening.third %>
+  <% fourth = screening.fourth %>
+  <% screening_id =screening.id %>
+  <div class = "col-sm-8">
+    <div class = "panel panel-default">
+      <div class = "panel-heading">
+        <h3 class = "panel-title"><%= movie_name %> :Rs <%= cost %></h3>
+      </div>
+      <div class = "panel-body">
+        <p><%= theater_name %></p>
+        <p><%= theater_address %></p>
+        <p>
+        <% if first && ((Time.new).hour < 9)%>
+          <%= link_to "10 Am",buyticket_path(screening_id: screening_id, show: 1), class: "btn btn-primary btn-sm" %>
+        <% end %>
+
+        <% if second && ((Time.new).hour < 13) %>
+          <%= link_to "1 Pm",buyticket_path(screening_id: screening_id, show: 2), class: "btn btn-primary btn-sm" %>
+        <% end %>
+
+        <% if third && ((Time.new).hour < 16) %>
+          <%= link_to "4 Pm",buyticket_path(screening_id: screening_id, show: 3), class: "btn btn-primary btn-sm" %>
+        <% end %>
+
+        <% if fourth && ((Time.new).hour < 19) %> <!-- 19 -->
+          <%= link_to "7 Pm",buyticket_path(screening_id: screening_id, show: 4), class: "btn btn-primary btn-sm" %>
+        <% end %>
+
+        <% if ((Time.new).hour >= 19) %>
+          <p class="text-primary">Booking closed for today</p>
+        <% end %>
+
+        </p>
+      </div>
+    </div>
+  </div>
+<% end %>

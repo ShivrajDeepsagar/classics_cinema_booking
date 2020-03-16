@@ -1,0 +1,60 @@
+<% provide(:title,"Booking History") %>
+<% if @reservations.length != 0 %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Movie Name</th>
+        <th>Theater Name</th>
+        <th>Date</th>
+        <th>Show Time</th>
+        <th>Seat Details</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @reservations.each do |reservation| %>
+        <tr>
+          <td><%= movie_name = reservation.screening.movie.movie_name%></td>
+          <td><%= theater_name = reservation.screening.theater.theater_name%></td>
+          <td><%= ondate = reservation.screening.ondate.to_date%></td>
+          <% screening_show = reservation.show_num %>
+          <% time = show_time(screening_show)[0]
+             time_c = show_time(screening_show)[1] %>
+          <td><%= time %></td>
+
+          <td>
+            <% number_of_seats = (reservation.seat.seat_details).length %>
+            <% for i in 0...number_of_seats %>
+            <%= reservation.seat.seat_details[i][0].upcase %>-<%= reservation.seat.seat_details[i][1] %>
+            <% end %>
+          </td>
+
+          <td>
+            <%if ondate < (DateTime.now).to_date %>
+               <p>InActive</p>
+               <td></td>
+             <% elsif ondate == (DateTime.now).to_date && (time_c > (DateTime.now).hour) %>
+               <p>Active</p>
+          </td>
+              <td>
+                <%= form_for(:booking, url: bookings_path, method: :delete) do |f| %>
+                <%= f.hidden_field :reservation_id, value: reservation.id %>
+                <%= f.submit "Cancel", class: "btn btn-primary btn-sm", data: { confirm: "Conformation\nMovie name: " + movie_name + "\nTheater name: " + theater_name+"\nDate: " + ondate.to_s+"\nTime: " + time} %>
+                <% end %>
+              </td>
+            <% elsif ondate == (DateTime.now).to_date && (time_c <= (DateTime.now).hour) %>
+              <p>InActive</p>
+               <td></td>
+            <% end %>
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <h3 class="text-primary">You have no Booking History </h3>
+  <a href=<%=root_path%> >Book Now!</a>
+<% end %>
+
+
