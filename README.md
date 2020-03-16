@@ -1,4 +1,4 @@
-# Movie Ticket Booking
+# Classic Movie Booking
 
 * Ruby version: ruby 2.4.1
 
